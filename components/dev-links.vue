@@ -2,6 +2,9 @@
   <div class="dev-links">
     <ul class="nav-list">
       <li class="nav-item">
+        <nuxt-link class="nav-link" to="/"> Главная </nuxt-link>
+      </li>
+      <li class="nav-item">
         <nuxt-link class="nav-link" to="/user"> Логин </nuxt-link>
       </li>
       <li class="nav-item">
