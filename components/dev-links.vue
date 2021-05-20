@@ -2,13 +2,13 @@
   <div class="dev-links">
     <ul class="nav-list">
       <li class="nav-item">
-        <nuxt-link class="nav-link" to="/"> Главная </nuxt-link>
+        <nuxt-link exact no-prefetch active-class="active" class="nav-link" to="/"> Главная </nuxt-link>
       </li>
       <li class="nav-item">
-        <nuxt-link class="nav-link" to="/user"> Логин </nuxt-link>
+        <nuxt-link active-class="active" class="nav-link" to="/user"> Логин </nuxt-link>
       </li>
       <li class="nav-item">
-        <nuxt-link class="nav-link" to="/users"> Пользователи </nuxt-link>
+        <nuxt-link active-class="active" class="nav-link" to="/users"> Пользователи </nuxt-link>
       </li>
     </ul>
   </div>
