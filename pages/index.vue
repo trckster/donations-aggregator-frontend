@@ -1,5 +1,5 @@
 <template>
   <div>
-    Here will be something soon
+    <Donations/>
   </div>
 </template>
