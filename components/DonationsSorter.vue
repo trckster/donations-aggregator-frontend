@@ -17,3 +17,11 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'DonationsSorter',
+}
+</script>
+
+<style scoped></style>

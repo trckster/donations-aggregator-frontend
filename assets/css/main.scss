@@ -7,13 +7,14 @@
   --border-radius-1: 4px;
 }
 
-body {
+html, body {
   font-family: var(--Proxima);
+  background-color: #ebebeb;
+  margin: 0;
 }
 
 #page {
   position: relative;
-  background-color: #ebebeb;
 }
 
 #page::before {
@@ -34,36 +35,36 @@ body {
   }
   #toggle-theme {
     i {
-      background-image: url("../images/sun-white.svg");
+      background-image: url("@/assets/images/sun-white.svg");
     }
   }
   .select-items {
     div {
       color: rgba(255, 255, 255, 0.7);
-      background: url("../images/trending-down-white.svg") no-repeat center left transparent;
+      background: url("@/assets/images/trending-down-white.svg") no-repeat center left transparent;
     }
   }
   .select-selected {
     color: rgba(255, 255, 255, 0.7);
-    background: url("../images/trending-down-white.svg") no-repeat center left transparent;
+    background: url("@/assets/images/trending-down-white.svg") no-repeat center left transparent;
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   }
   .select-items div,
   .select-selected {
     &[data-sort="value-desc"] {
-      background-image: url("../images/trending-down-white.svg");
+      background-image: url("@/assets/images/trending-down-white.svg");
     }
     &[data-sort="value-asc"] {
-      background-image: url("../images/trending-up-white.svg");
+      background-image: url("@/assets/images/trending-up-white.svg");
     }
     &[data-sort="date-old"] {
-      background-image: url("../images/clock-white.svg");
+      background-image: url("@/assets/images/clock-white.svg");
     }
     &[data-sort="date-new"] {
-      background-image: url("../images/clock-white.svg");
+      background-image: url("@/assets/images/clock-white.svg");
     }
     &[data-sort="hidd"] {
-      background-image: url("../images/archive-white.svg");
+      background-image: url("@/assets/images/archive-white.svg");
     }
   }
   .donates-container {
@@ -193,19 +194,19 @@ body.opened-filter .donates-col_hidden {
 }
 
 .to-hide {
-  background: url("../images/archive.svg") no-repeat center left transparent;
+  background: url("@/assets/images/archive.svg") no-repeat center left transparent;
 }
 
 .move-to-hide-show:hover .to-hide {
-  background: url("../images/archive-highlight.svg") no-repeat center left transparent;
+  background: url("@/assets/images/archive-highlight.svg") no-repeat center left transparent;
 }
 
 .to-show {
-  background: url("../images/unarchive.svg") no-repeat center left transparent;
+  background: url("@/assets/images/unarchive.svg") no-repeat center left transparent;
 }
 
 .move-to-hide-show:hover .to-show {
-  background: url("../images/unarchive-highlight.svg") no-repeat center left transparent;
+  background: url("@/assets/images/unarchive-highlight.svg") no-repeat center left transparent;
 }
 
 
@@ -217,7 +218,7 @@ body.opened-filter .donates-col_hidden {
   padding: 15px 0;
   cursor: pointer;
   padding: 15px 0 15px 35px;
-  background: url("../images/trending-down.svg") no-repeat center left transparent;
+  background: url("@/assets/images/trending-down.svg") no-repeat center left transparent;
   opacity: 0.7;
   -webkit-transition: opacity 100ms;
   -o-transition: opacity 100ms;
@@ -233,19 +234,19 @@ body.opened-filter .donates-col_hidden {
 .select-items div,
 .select-selected {
   &[data-sort="value-desc"] {
-    background-image: url("../images/trending-down.svg");
+    background-image: url("@/assets/images/trending-down.svg");
   }
   &[data-sort="value-asc"] {
-    background-image: url("../images/trending-up.svg");
+    background-image: url("@/assets/images/trending-up.svg");
   }
   &[data-sort="date-old"] {
-    background-image: url("../images/clock.svg");
+    background-image: url("@/assets/images/clock.svg");
   }
   &[data-sort="date-new"] {
-    background-image: url("../images/clock.svg");
+    background-image: url("@/assets/images/clock.svg");
   }
   &[data-sort="hidd"] {
-    background-image: url("../images/archive-black.svg");
+    background-image: url("@/assets/images/archive-black.svg");
   }
 }
 
@@ -289,7 +290,7 @@ body.opened-filter .donates-col_hidden {
 }
 
 #toggle-theme i {
-  background: url("../images/moon.svg") no-repeat center center / 16px transparent;
+  background: url("@/assets/images/moon.svg") no-repeat center center / 16px transparent;
   display: block;
   width: 100%;
   height: 100%;
