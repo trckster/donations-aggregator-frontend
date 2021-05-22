@@ -1,61 +1,50 @@
 export default {
-    // Global page headers: https://go.nuxtjs.dev/config-head
-    head: {
-        title: 'donate-thing',
-        meta: [
-            { charset: 'utf-8' },
-            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-            { hid: 'description', name: 'description', content: '' },
-        ],
-        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+  // Global page headers: https://go.nuxtjs.dev/config-head
+  head: {
+    title: 'Frontend',
+    htmlAttrs: {
+      lang: 'en'
     },
-
-    // Global CSS: https://go.nuxtjs.dev/config-css
-    css: [
-        '@/static/css/fonts.css',
-        '@/static/css/libs-bundle.min.css',
-        '@/static/css/style.min.css',
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'description', name: 'description', content: '' }
     ],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ]
+  },
 
-    // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-    plugins: [
-        { src: '~/static/js/main.min.js', mode: 'client' },
-    ],
+  // Global CSS: https://go.nuxtjs.dev/config-css
+  css: [
+    'element-ui/lib/theme-chalk/index.css'
+  ],
 
-    // Auto import components: https://go.nuxtjs.dev/config-components
-    components: true,
+  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
+  plugins: [
+    '@/plugins/element-ui'
+  ],
 
-    // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-    buildModules: [
-        // https://go.nuxtjs.dev/eslint
-        // '@nuxtjs/eslint-module',
-        // // https://go.nuxtjs.dev/stylelint
-        // '@nuxtjs/stylelint-module',
-    ],
+  // Auto import components: https://go.nuxtjs.dev/config-components
+  components: true,
 
-    // Modules: https://go.nuxtjs.dev/config-modules
-    modules: [
-        // https://go.nuxtjs.dev/axios
-        '@nuxtjs/axios',
-        // https://go.nuxtjs.dev/pwa
-        '@nuxtjs/pwa',
-        // https://go.nuxtjs.dev/content
-        '@nuxt/content',
-    ],
+  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
+  buildModules: [
+    // https://go.nuxtjs.dev/eslint
+    '@nuxtjs/eslint-module'
+  ],
 
-    // Axios module configuration: https://go.nuxtjs.dev/config-axios
-    axios: {},
+  // Modules: https://go.nuxtjs.dev/config-modules
+  modules: [
+    // https://go.nuxtjs.dev/axios
+    '@nuxtjs/axios'
+  ],
 
-    // PWA module configuration: https://go.nuxtjs.dev/pwa
-    pwa: {
-        manifest: {
-            lang: 'ru',
-        },
-    },
+  // Axios module configuration: https://go.nuxtjs.dev/config-axios
+  axios: {},
 
-    // Content module configuration: https://go.nuxtjs.dev/config-content
-    content: {},
-
-    // Build Configuration: https://go.nuxtjs.dev/config-build
-    build: {},
+  // Build Configuration: https://go.nuxtjs.dev/config-build
+  build: {
+    transpile: [/^element-ui/]
+  }
 }
