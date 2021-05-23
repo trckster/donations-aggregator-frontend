@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DonationsSorter />
+    <Header />
     <div id="js-col_to-display" class="container donates-wrap">
       <Card
         v-for="donation in donations"
@@ -13,11 +13,11 @@
 
 <script>
 import Card from './Card'
-import DonationsSorter from './DonationsSorter'
+import Header from './header/Header'
 
 export default {
   name: 'Donations',
-  components: { DonationsSorter, Card },
+  components: { Header, Card },
   data() {
     return {
       donations: [
