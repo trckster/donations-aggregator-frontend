@@ -7,6 +7,7 @@
         :key="donation.id"
         :donation="donation"
       />
+      Here: {{ donations }}
     </div>
   </div>
 </template>
@@ -18,17 +19,13 @@ import Header from './header/Header'
 export default {
   name: 'Donations',
   components: { Header, Card },
-  data() {
-    return {
-      donations: [
-        {
-          id: 1,
-        },
-        {
-          id: 2,
-        },
-      ],
-    }
+  computed: {
+    donations() {
+      return this.$store.state.donations
+    },
+  },
+  created() {
+    this.$store.dispatch('loadDonations')
   },
 }
 </script>
