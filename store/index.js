@@ -17,16 +17,24 @@ export const actions = {
   async nuxtServerInit({ commit }, { req }) {
     // Add auth
   },
-  async loadDonations({ commit }) {
-    const donations = [
-      {
-        id: 1,
-      },
-    ]
+  async loadDonations({ commit }, filters) {
+    let sortField = 'amount'
+    let sortOrder = 'desc'
+    if (filters.sort === 'amount-asc') {
+      sortOrder = 'asc'
+    } else if (filters.sort === 'time-desc') {
+      sortField = 'paid_at'
+    } else if (filters.sort === 'time-asc') {
+      sortField = 'paid_at'
+      sortOrder = 'asc'
+    }
 
-    // Temproray fix
-    await new Promise((resolve) => setTimeout(resolve, 1))
+    const data = await this.$axios.$get(
+      `donations?sort-field=${sortField}&sort-order=${sortOrder}&is-hidden=${
+        filters.is_hidden ? 1 : 0
+      }`
+    )
 
-    commit('setDonations', donations)
+    commit('setDonations', data)
   },
 }

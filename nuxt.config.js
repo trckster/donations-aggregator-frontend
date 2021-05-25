@@ -35,7 +35,10 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    port: process.env.API_PORT || 80,
+    prefix: '/api/',
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

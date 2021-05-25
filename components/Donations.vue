@@ -32,15 +32,13 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('loadDonations')
+    this.$store.dispatch('loadDonations', this.filters)
   },
   methods: {
     updateFilters(newValue) {
       this.filters = newValue
-      // Reload donations
+      this.$store.dispatch('loadDonations', this.filters)
     },
   },
 }
 </script>
-
-<style scoped></style>

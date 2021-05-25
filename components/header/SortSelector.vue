@@ -49,7 +49,7 @@ export default {
         },
         {
           value: 'time-desc',
-          label: 'Сначала старые',
+          label: 'Сначала новые',
         },
       ],
     }
