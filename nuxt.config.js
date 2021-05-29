@@ -36,13 +36,13 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    browserBaseURL: 'http://localhost:8000/api/'
+    browserBaseURL: 'http://localhost:8000/api/',
   },
 
   publicRuntimeConfig: {
     axios: {
-      browserBaseURL: process.env.API_URL
-    }
+      browserBaseURL: process.env.API_URL,
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
