@@ -11,6 +11,11 @@ export const mutations = {
   setDonations(state, donations) {
     state.donations = donations
   },
+  removeDonation(state, donationId) {
+    state.donations = state.donations.filter(
+      (donation) => donation.id !== donationId
+    )
+  },
 }
 
 export const actions = {
@@ -36,5 +41,14 @@ export const actions = {
     )
 
     commit('setDonations', data)
+  },
+  async update({ commit }, data) {
+    await this.$axios
+      .$put(`donations/${data.id}`, {
+        'is-hidden': data.isHidden,
+      })
+      .then(() => {
+        commit('removeDonation', data.id)
+      })
   },
 }

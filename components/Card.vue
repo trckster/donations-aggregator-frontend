@@ -15,7 +15,7 @@
           {{ donation.text }}
         </p>
       </div>
-      <div class="move-to-hide-show">
+      <div class="move-to-hide-show" @click="changeIsHidden">
         <span :class="isHiddenClass">
           {{ donation.is_hidden ? 'Не скрывать' : 'Скрыть' }}
         </span>
@@ -39,6 +39,14 @@ export default {
         'to-show': this.donation.is_hidden,
         'to-hide': !this.donation.is_hidden,
       }
+    },
+  },
+  methods: {
+    changeIsHidden() {
+      this.$store.dispatch('update', {
+        id: this.donation.id,
+        isHidden: !this.donation.is_hidden,
+      })
     },
   },
 }
