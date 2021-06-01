@@ -1,12 +1,12 @@
 <template>
   <div class="card-with-comment">
-    <div v-show="donation.admin_comment || false" class="admin-comment">
-      {{ donation.admin_comment }}
+    <div v-show="donation.adminComment || false" class="admin-comment">
+      {{ donation.adminComment }}
     </div>
     <div class="donates-container">
       <div class="donates__title">
         <span class="donates__author"> {{ donation.from }} </span>
-        <div class="donates__time">{{ donation.paid_at }}</div>
+        <div class="donates__time">{{ donation.paidAt }}</div>
         <!-- TODO change paid_at to time passed since this second -->
       </div>
       <PriceBadge :value="donation.amount" />
@@ -17,7 +17,7 @@
       </div>
       <div class="move-to-hide-show" @click="changeIsHidden">
         <span :class="isHiddenClass">
-          {{ donation.is_hidden ? 'Не скрывать' : 'Скрыть' }}
+          {{ donation.isHidden ? 'Не скрывать' : 'Скрыть' }}
         </span>
       </div>
     </div>
@@ -36,8 +36,8 @@ export default {
   computed: {
     isHiddenClass() {
       return {
-        'to-show': this.donation.is_hidden,
-        'to-hide': !this.donation.is_hidden,
+        'to-show': this.donation.isHidden,
+        'to-hide': !this.donation.isHidden,
       }
     },
   },
@@ -45,7 +45,7 @@ export default {
     changeIsHidden() {
       this.$store.dispatch('update', {
         id: this.donation.id,
-        isHidden: !this.donation.is_hidden,
+        isHidden: !this.donation.isHidden,
       })
     },
   },
@@ -54,7 +54,7 @@ export default {
 
 <style lang="scss" scoped>
 .card-with-comment {
-  margin: 2em;
+  margin-bottom: 2em;
 }
 .admin-comment {
   text-align: center;

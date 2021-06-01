@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     amount() {
-      return this.value / 100
+      return this.value
     },
     priceClass() {
       const level =

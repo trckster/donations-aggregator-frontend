@@ -1,3 +1,5 @@
+import donationAdapter from '@/adapters/DonationAdapter'
+
 export const state = () => ({
   isAuthenticated: false,
   donations: [],
@@ -34,11 +36,15 @@ export const actions = {
       sortOrder = 'asc'
     }
 
-    const data = await this.$axios.$get(
-      `donations?sort-field=${sortField}&sort-order=${sortOrder}&is-hidden=${
-        filters.is_hidden ? 1 : 0
-      }`
-    )
+    const data = await this.$axios
+      .$get(
+        `donations?sort-field=${sortField}&sort-order=${sortOrder}&is-hidden=${
+          filters.is_hidden ? 1 : 0
+        }`
+      )
+      .then((response) => {
+        return response.map((donation) => donationAdapter(donation))
+      })
 
     commit('setDonations', data)
   },
