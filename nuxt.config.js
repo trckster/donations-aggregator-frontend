@@ -17,7 +17,11 @@ export default {
   css: ['element-ui/lib/theme-chalk/index.css', '@/assets/css/main'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@/plugins/element-ui', '@/plugins/vuex'],
+  plugins: [
+    '@/plugins/element-ui',
+    '@/plugins/vuex',
+    { src: '@/plugins/client', mode: 'client' },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

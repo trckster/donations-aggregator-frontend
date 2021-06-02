@@ -8,6 +8,12 @@
         :donation="donation"
       />
     </div>
+    <client-only>
+      <scroll-loader
+        :loader-method="loadMoreDonations"
+        :loader-disable="stopLoading"
+      />
+    </client-only>
   </div>
 </template>
 
@@ -20,6 +26,7 @@ export default {
   components: { Header, Card },
   data() {
     return {
+      stopLoading: false,
       filters: {
         sort: 'amount-desc',
         is_hidden: false,
@@ -32,12 +39,22 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('loadDonations', this.filters)
+    this.loadDonations()
   },
   methods: {
+    loadDonations() {
+      this.$store.dispatch('loadDonations', this.filters).then(() => {
+        this.stopLoading = this.donations.length === 0
+      })
+    },
+    loadMoreDonations() {
+      this.$store.dispatch('loadMoreDonations', this.filters).then((loaded) => {
+        this.stopLoading = !loaded
+      })
+    },
     updateFilters(newValue) {
       this.filters = newValue
-      this.$store.dispatch('loadDonations', this.filters)
+      this.loadDonations()
     },
   },
 }
