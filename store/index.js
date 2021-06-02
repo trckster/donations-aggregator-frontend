@@ -45,6 +45,7 @@ export const actions = {
       .then((response) => {
         return response.map((donation) => donationAdapter(donation))
       })
+      .catch(() => {})
 
     commit('setDonations', data)
   },
