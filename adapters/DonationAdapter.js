@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 function donationAdapter(donation) {
   return {
     id: donation.id,
@@ -11,9 +13,9 @@ function donationAdapter(donation) {
     adminComment: donation.admin_comment,
     status: donation.status,
     additionalData: donation.additional_data,
-    paidAt: donation.paid_at,
-    createdAt: donation.created_at,
-    updatedAt: donation.updated_at,
+    paidAt: moment(donation.paid_at),
+    createdAt: moment(donation.created_at),
+    updatedAt: moment(donation.updated_at),
   }
 }
 

@@ -6,7 +6,7 @@
     <div class="donates-container">
       <div class="donates__title">
         <span class="donates__author"> {{ donation.from }} </span>
-        <div class="donates__time">{{ donation.paidAt }}</div>
+        <div class="donates__time">{{ donation.paidAt.fromNow() }}</div>
         <!-- TODO change paid_at to time passed since this second -->
       </div>
       <PriceBadge :value="donation.amount" />
