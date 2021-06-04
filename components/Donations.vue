@@ -44,7 +44,7 @@ export default {
   methods: {
     loadDonations() {
       this.$store.dispatch('loadDonations', this.filters).then(() => {
-        this.stopLoading = this.donations.length === 0
+        this.stopLoading = this.donations && this.donations.length === 0
       })
     },
     loadMoreDonations() {

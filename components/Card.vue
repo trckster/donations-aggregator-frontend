@@ -1,6 +1,6 @@
 <template>
   <div class="card-with-comment">
-    <div v-show="donation.adminComment || false" class="admin-comment">
+    <div v-show="donation.adminComment" class="admin-comment">
       {{ donation.adminComment }}
     </div>
     <div class="donates-container">
