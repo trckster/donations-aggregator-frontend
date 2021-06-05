@@ -35,7 +35,7 @@ export default {
   },
   computed: {
     donations() {
-      return this.$store.state.donations
+      return this.$store.getters.donations
     },
   },
   created() {

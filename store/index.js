@@ -16,15 +16,26 @@ function retrieveSortParameters(filters) {
 }
 
 export const state = () => ({
+  darkModeEnabled: false,
   isAuthenticated: false,
   donations: [],
 })
 
 export const getters = {
   donations: ({ donations }) => donations,
+  darkModeEnabled: ({ darkModeEnabled }) => darkModeEnabled,
 }
 
 export const mutations = {
+  initStorage(state) {
+    if (process.browser) {
+      state.darkModeEnabled = localStorage.getItem('darkModeEnabled') === 'true'
+    }
+  },
+  changeTheme(state) {
+    state.darkModeEnabled = !state.darkModeEnabled
+    localStorage.setItem('darkModeEnabled', state.darkModeEnabled)
+  },
   setDonations(state, donations) {
     state.donations = donations
   },

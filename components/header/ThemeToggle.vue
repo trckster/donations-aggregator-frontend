@@ -1,5 +1,5 @@
 <template>
-  <div id="toggle-theme">
+  <div id="toggle-theme" @click="$store.commit('changeTheme')">
     <i class="icon-toggle"></i>
   </div>
 </template>
