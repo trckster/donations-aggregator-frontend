@@ -87,13 +87,9 @@ export const actions = {
       })
       .catch(() => {})
 
-    if (data.length === 0) {
-      return false
-    }
-
     commit('addDonations', data)
 
-    return true
+    return data.length >= 25
   },
   async update({ commit }, data) {
     await this.$axios
