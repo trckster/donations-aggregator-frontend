@@ -100,8 +100,14 @@ export default {
   right: 5px;
   display: inline-block;
   padding: 16px;
-  background-color: white;
   opacity: 0;
+  -webkit-transition: opacity 100ms;
+  -o-transition: opacity 100ms;
+  transition: opacity 100ms;
+  cursor: pointer;
+}
+
+.donates__time {
   -webkit-transition: opacity 100ms;
   -o-transition: opacity 100ms;
   transition: opacity 100ms;
@@ -109,6 +115,10 @@ export default {
 
 .donates-container:hover .move-to-hide-show {
   opacity: 1;
+}
+
+.donates-container:hover .donates__time {
+  opacity: 0;
 }
 
 .move-to-hide-show span {
@@ -121,7 +131,6 @@ export default {
   width: 100%;
   display: inline-block;
   padding-left: 22px;
-  cursor: pointer;
   box-sizing: border-box;
 }
 
