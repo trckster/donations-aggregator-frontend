@@ -51,11 +51,22 @@ export const mutations = {
       (donation) => donation.id !== donationId
     )
   },
+  setAuthenticated(state) {
+    state.isAuthenticated = true
+  },
 }
 
 export const actions = {
-  async nuxtServerInit({ commit }, { req }) {
-    // Add auth
+  async nuxtServerInit({ dispatch }) {
+    await dispatch('loadUser')
+  },
+  async loadUser({ commit }) {
+    await this.$axios
+      .$get('me')
+      .then(() => {
+        commit('setAuthenticated')
+      })
+      .catch(() => {})
   },
   async loadDonations({ commit }, filters) {
     const [sortField, sortOrder] = retrieveSortParameters(filters)

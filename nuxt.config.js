@@ -45,11 +45,18 @@ export default {
   },
   axios: {
     browserBaseURL: 'http://localhost:8000/api/',
+    baseURL: 'http://localhost:8000/api/',
   },
 
   publicRuntimeConfig: {
     axios: {
       browserBaseURL: process.env.API_URL,
+    },
+  },
+
+  privateRuntimeConfig: {
+    axios: {
+      baseURL: process.env.BACKEND_API_URL,
     },
   },
 
