@@ -1,62 +1,6 @@
 /* eslint-disable prettier/prettier */
 import donationAdapter from '@/adapters/DonationAdapter'
 
-const mockDonations = [{ // CHANGE ON PROD
-  "id": 12,
-  "is_hidden": false,
-  "source": "donatepay",
-  "external_id": 483950,
-  "from": "Elvis Okuneva",
-  "amount": 2698800,
-  "commission": 404820,
-  "text": "Qui quisquam laborum est alias quas omnis. Occaecati illo perferendis quas deserunt tempore molestiae et. Placeat aut velit et cupiditate cumque. Ea architecto magni labore.",
-  "admin_comment": "",
-  "status": "test",
-  "additional_data": {
-    "unde": "aperiam"
-  },
-  "paid_at": "2021-06-06 11:02:25",
-  "created_at": "2021-06-06T13:10:37.000000Z",
-  "updated_at": "2021-06-06T13:10:37.000000Z"
-},
-{
-  "id": 42,
-  "is_hidden": false,
-  "source": "donatepay",
-  "external_id": 889867,
-  "from": "Mr. Sheldon Bosco",
-  "amount": 2078600,
-  "commission": 311790,
-  "text": "Magnam et accusantium sit quaerat nulla perferendis minus. Voluptatem animi perferendis et.",
-  "admin_comment": "Sunt cumque nihil maiores velit. Commodi assumenda illum est. Distinctio labore earum quam recusandae non. Occaecati libero aut cum labore ea dicta aut. Itaque earum quae ut sit repudiandae.",
-  "status": "cancel",
-  "additional_data": {
-    "quia": "neque"
-  },
-  "paid_at": "2021-06-06 07:39:05",
-  "created_at": "2021-06-06T13:10:37.000000Z",
-  "updated_at": "2021-06-06T13:10:37.000000Z"
-
-},
-{
-  "id": 95,
-  "is_hidden": false,
-  "source": "donatepay",
-  "external_id": 485139,
-  "from": "Darrel Kub",
-  "amount": 2147000,
-  "commission": 322050,
-  "text": "Necessitatibus ex id et qui soluta laborum non. Iure qui corporis at aliquam ea. Quia odit eos quidem alias suscipit facilis dolores eaque. Aut illum voluptas voluptates fugiat quas eaque voluptatem.",
-  "admin_comment": "",
-  "status": "wait",
-  "additional_data": {
-    "sit": "iusto"
-  },
-  "paid_at": "2021-06-05 22:35:29",
-  "created_at": "2021-06-06T13:10:37.000000Z",
-  "updated_at": "2021-06-06T13:10:37.000000Z"
-}]
-
 function retrieveSortParameters(filters) {
   let sortField = 'amount'
   let sortOrder = 'desc'
@@ -121,20 +65,18 @@ export const actions = {
   async nuxtServerInit({ commit }, { req }) {
     // Add auth
   },
-  loadDonations({ commit }, filters) { // CHANGE ON PROD
-    // const [sortField, sortOrder] = retrieveSortParameters(filters)
+  async loadDonations({ commit }, filters) {
+    const [sortField, sortOrder] = retrieveSortParameters(filters)
 
-    // const data = await this.$axios
-    //   .$get(
-    //     `donations?sort-field=${sortField}&sort-order=${sortOrder}&is-hidden=${filters.is_hidden ? 1 : 0
-    //     }`
-    //   )
-    //   .then((response) => {
-    //     return response.map((donation) => donationAdapter(donation))
-    //   })
-    //   .catch(() => { })
-
-    const data = mockDonations.map(donation => donationAdapter(donation));
+    const data = await this.$axios
+      .$get(
+        `donations?sort-field=${sortField}&sort-order=${sortOrder}&is-hidden=${filters.is_hidden ? 1 : 0
+        }`
+      )
+      .then((response) => {
+        return response.map((donation) => donationAdapter(donation))
+      })
+      .catch(() => { })
 
     commit('setDonations', data)
   },

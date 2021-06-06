@@ -144,7 +144,8 @@ body,
   display: none;
 }
 
-.icon-toggle {
+.icon-toggle,
+.hidden-toggle {
   width: 46px;
   cursor: pointer;
   z-index: 5;
@@ -152,11 +153,25 @@ body,
   -webkit-transition: opacity 100ms;
   -o-transition: opacity 100ms;
   transition: opacity 100ms;
+}
+
+.icon-toggle {
   background: url('@/assets/images/moon.svg') no-repeat center center / 16px
     transparent;
 }
 
-.icon-toggle:hover {
+.hidden-toggle {
+  background: url('@/assets/images/archive-black.svg') no-repeat center center /
+    16px transparent;
+
+  &.hidden-toggle-active {
+    background: url('@/assets/images/archive-highlight.svg') no-repeat center
+      center / 16px transparent;
+  }
+}
+
+.icon-toggle:hover,
+.hidden-toggle:hover {
   opacity: 1;
 }
 
@@ -319,6 +334,14 @@ body,
   }
   .icon-toggle {
     background-image: url('@/assets/images/sun-white.svg');
+  }
+  .hidden-toggle {
+    background: url('@/assets/images/archive-white.svg') no-repeat center center /
+      16px transparent;
+    &.hidden-toggle-active {
+      background: url('@/assets/images/archive-highlight.svg') no-repeat center
+        center / 16px transparent;
+    }
   }
   .select-items {
     div {

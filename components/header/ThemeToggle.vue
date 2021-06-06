@@ -7,5 +7,3 @@ export default {
   name: 'ThemeToggle',
 }
 </script>
-
-<style scoped></style>

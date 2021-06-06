@@ -26,7 +26,7 @@ export default {
   components: { Header, Card },
   data() {
     return {
-      stopLoading: true, // CHANGE ON PROD
+      stopLoading: false,
       filters: {
         sort: 'amount-desc',
         is_hidden: false,
@@ -53,7 +53,7 @@ export default {
       })
     },
     updateFilters(newValue) {
-      this.filters = newValue
+      Object.assign(this.filters, newValue)
       this.loadDonations()
     },
   },

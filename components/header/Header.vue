@@ -1,8 +1,8 @@
 <template>
   <div class="container filter-donates">
     <div class="slct__group">
-      <SortSelector :value="value.sort" @change="updateSort" />
-      <!-- <HiddenCheckbox :value="value.is_hidden" @change="updateIsHidden" /> -->
+      <SortSelector :value="sort" @change="updateSort" />
+      <HiddenToggle :value="is_hidden" @change="updateIsHidden" />
       <ThemeToggle />
     </div>
   </div>
@@ -11,34 +11,29 @@
 <script>
 import ThemeToggle from './ThemeToggle'
 import SortSelector from './SortSelector'
-// import HiddenCheckbox from './HiddenCheckbox'
+import HiddenToggle from './HiddenToggle'
 export default {
   name: 'Header',
   components: {
-    // HiddenCheckbox,
+    HiddenToggle,
     SortSelector,
     ThemeToggle,
   },
-  props: {
-    value: {
-      type: Object,
-      default: () => ({
-        sort: 'amount-desc',
-        is_hidden: false,
-      }),
-    },
+  data() {
+    return {
+      sort: 'amount-desc',
+      is_hidden: false,
+    }
   },
   methods: {
     updateSort(newValue) {
-      const newFilters = this.value
-      newFilters.sort = newValue
-      this.$emit('change', newFilters)
+      this.sort = newValue
+      this.$emit('change', { sort: newValue })
     },
-    // updateIsHidden(newValue) {
-    //   const newFilters = this.value
-    //   newFilters.is_hidden = newValue
-    //   this.$emit('change', newFilters)
-    // },
+    updateIsHidden(newValue) {
+      this.is_hidden = newValue
+      this.$emit('change', { is_hidden: newValue })
+    },
   },
 }
 </script>
