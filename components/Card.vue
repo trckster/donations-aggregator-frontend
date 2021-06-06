@@ -15,6 +15,7 @@
           class="input-box"
           type="text"
           maxlength="50"
+          @blur="changeAdminComment"
           @keyup.enter="changeAdminComment"
         />
       </div>
