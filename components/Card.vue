@@ -1,7 +1,26 @@
 <template>
   <div class="card-with-comment">
-    <div v-show="donation.adminComment" class="admin-comment">
-      {{ donation.adminComment }}
+    <div
+      class="donates-between-container"
+      :class="{
+        'with-text': currentComment,
+        'active-input': isActiveComment,
+      }"
+      @click="toggleActive"
+    >
+      <div v-if="isActiveComment">
+        <input
+          ref="inputComment"
+          v-model="currentComment"
+          class="input-box"
+          type="text"
+          maxlength="50"
+          @keyup.enter="changeAdminComment"
+        />
+      </div>
+      <div v-else>
+        {{ currentComment }}
+      </div>
     </div>
     <div class="donates-container">
       <div class="donates__title">
@@ -33,6 +52,13 @@ export default {
       default: () => {},
     },
   },
+  data() {
+    return {
+      isActiveComment: false,
+      // TODO: Ask whether comment in data is better than donation state
+      currentComment: this.donation.adminComment,
+    }
+  },
   computed: {
     isHiddenClass() {
       return {
@@ -43,9 +69,24 @@ export default {
   },
   methods: {
     changeIsHidden() {
-      this.$store.dispatch('update', {
+      this.$store.dispatch('updateHidden', {
         id: this.donation.id,
         isHidden: !this.donation.isHidden,
+      })
+    },
+    changeAdminComment() {
+      this.$store.dispatch('updateComment', {
+        id: this.donation.id,
+        adminComment: this.currentComment,
+      })
+      this.toggleActive()
+    },
+    toggleActive() {
+      this.isActiveComment = !this.isActiveComment
+      this.$nextTick(() => {
+        if (this.$refs.inputComment) {
+          this.$refs.inputComment.focus()
+        }
       })
     },
   },
@@ -53,13 +94,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-with-comment {
-  margin-bottom: 2em;
-}
-.admin-comment {
-  text-align: center;
-}
-
 .donates-container .move-to-hide-show {
   position: absolute;
   top: 5px;
@@ -78,7 +112,7 @@ export default {
 }
 
 .move-to-hide-show span {
-  font-family: Roboto;
+  font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;

@@ -26,7 +26,7 @@ export default {
   components: { Header, Card },
   data() {
     return {
-      stopLoading: false,
+      stopLoading: true, // CHANGE ON PROD
       filters: {
         sort: 'amount-desc',
         is_hidden: false,
