@@ -1,26 +1,43 @@
 <template>
-  <span class="custom-slct">
-    <label>
-      <select class="slct js-type-sort" name="order">
-        <option class="select-selected" value="default">
-          По убыванию доната
-        </option>
-        <option value="value-desc">По убыванию доната</option>
-        <option value="value-asc">По возрастанию доната</option>
-        <option value="date-old">Сначала старые</option>
-        <option value="date-new">Сначала новые</option>
-      </select>
-    </label>
-
-    <el-select :value="value" @input="$emit('change', $event)">
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-      />
-    </el-select>
-  </span>
+  <div class="custom-slct">
+    <div
+      class="select-selected"
+      :class="{ 'select-active': $store.getters.isFilterOpen }"
+      :data-sort="value"
+      @click="$store.commit('toggleFilter')"
+    >
+      {{ selectedLabel }}
+    </div>
+    <div
+      class="select-items"
+      :class="{ 'select-hide': !$store.getters.isFilterOpen }"
+    >
+      <div
+        v-for="(option, i) of options"
+        :key="i"
+        :data-sort="option.value"
+        @click="
+          $emit('change', option.value)
+          $store.commit('toggleFilter')
+        "
+      >
+        {{ option.label }}
+      </div>
+    </div>
+    <!-- <select
+      class="slct js-type-sort"
+      name="order"
+      @change="$emit('change', $event)"
+    >
+      <option
+        v-for="option in options"
+        :key="option.value"
+        :value="option.value"
+      >
+        {{ option.label }}
+      </option>
+    </select> -->
+  </div>
 </template>
 
 <script>
@@ -53,6 +70,11 @@ export default {
         },
       ],
     }
+  },
+  computed: {
+    selectedLabel() {
+      return this.options.find((option) => option.value === this.value).label
+    },
   },
 }
 </script>
