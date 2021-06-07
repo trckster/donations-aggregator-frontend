@@ -13,6 +13,7 @@
 <script>
 export default {
   name: 'DefaultLayout',
+  middleware: 'auth',
   mounted() {
     this.$store.commit('initStorage')
   },
