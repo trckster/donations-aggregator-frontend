@@ -334,6 +334,12 @@ body,
   -o-transition: opacity 100ms;
   transition: opacity 100ms;
   cursor: pointer;
+  &-mobile {
+    display: block;
+    opacity: 1;
+    position: static;
+    padding-left: 0;
+  }
 }
 
 .donates__time {

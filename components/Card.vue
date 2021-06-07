@@ -38,7 +38,13 @@
           {{ donation.text }}
         </p>
       </div>
-      <div class="move-to-hide-show" @click="changeIsHidden">
+      <div
+        class="move-to-hide-show"
+        :class="{
+          'move-to-hide-show-mobile': $device.isMobileOrTablet,
+        }"
+        @click="changeIsHidden"
+      >
         <span :class="isHiddenClass">
           {{ donation.isHidden ? 'Не скрывать' : 'Скрыть' }}
         </span>
