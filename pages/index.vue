@@ -1,5 +1,3 @@
 <template>
-  <div>
-    <Donations />
-  </div>
+  <Donations />
 </template>

@@ -1,13 +1,35 @@
 <template>
   <div class="card-with-comment">
-    <div v-show="donation.adminComment" class="admin-comment">
-      {{ donation.adminComment }}
+    <div
+      class="donates-between-container"
+      :class="{
+        'with-text': currentComment,
+        'active-input': isActiveComment,
+      }"
+      @click="toggleActive"
+    >
+      <div v-if="isActiveComment">
+        <textarea-autosize
+          ref="inputComment"
+          :value="currentComment"
+          class="input-box"
+          maxlength="1000"
+          min-height="24"
+          rows="1"
+          aria-multiline="true"
+          @blur.native="changeAdminComment"
+          @keyup.enter.native="changeAdminComment"
+          @keydown.enter.native="preventDefault"
+        />
+      </div>
+      <div v-else class="text-wrap">
+        {{ currentComment }}
+      </div>
     </div>
     <div class="donates-container">
       <div class="donates__title">
         <span class="donates__author"> {{ donation.from }} </span>
         <div class="donates__time">{{ donation.paidAt.fromNow() }}</div>
-        <!-- TODO change paid_at to time passed since this second -->
       </div>
       <PriceBadge :value="donation.amount" />
       <div class="donates__text">
@@ -15,7 +37,13 @@
           {{ donation.text }}
         </p>
       </div>
-      <div class="move-to-hide-show" @click="changeIsHidden">
+      <div
+        class="move-to-hide-show"
+        :class="{
+          'move-to-hide-show-mobile': $device.isMobileOrTablet,
+        }"
+        @click="changeIsHidden"
+      >
         <span :class="isHiddenClass">
           {{ donation.isHidden ? 'Не скрывать' : 'Скрыть' }}
         </span>
@@ -33,6 +61,13 @@ export default {
       default: () => {},
     },
   },
+  data() {
+    return {
+      isActiveComment: false,
+      // TODO: Ask whether comment in data is better than donation state
+      currentComment: this.donation.adminComment,
+    }
+  },
   computed: {
     isHiddenClass() {
       return {
@@ -43,75 +78,32 @@ export default {
   },
   methods: {
     changeIsHidden() {
-      this.$store.dispatch('update', {
+      this.$store.dispatch('updateHidden', {
         id: this.donation.id,
         isHidden: !this.donation.isHidden,
       })
     },
+    changeAdminComment(event) {
+      if (this.currentComment !== event.target.value) {
+        this.currentComment = event.target.value
+        this.$store.dispatch('updateComment', {
+          id: this.donation.id,
+          adminComment: this.currentComment,
+        })
+      }
+      this.isActiveComment = false
+    },
+    toggleActive() {
+      this.isActiveComment = true
+      this.$nextTick(() => {
+        if (this.$refs.inputComment) {
+          this.$refs.inputComment.$el.focus()
+        }
+      })
+    },
+    preventDefault(event) {
+      event.preventDefault()
+    },
   },
 }
 </script>
-
-<style lang="scss" scoped>
-.card-with-comment {
-  margin-bottom: 2em;
-}
-.admin-comment {
-  text-align: center;
-}
-
-.donates-container .move-to-hide-show {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  display: inline-block;
-  padding: 16px;
-  background-color: white;
-  opacity: 0;
-  -webkit-transition: opacity 100ms;
-  -o-transition: opacity 100ms;
-  transition: opacity 100ms;
-}
-
-.donates-container:hover .move-to-hide-show {
-  opacity: 1;
-}
-
-.move-to-hide-show span {
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 16px;
-  color: #b73f3f;
-  width: 100%;
-  display: inline-block;
-  padding-left: 22px;
-  cursor: pointer;
-  box-sizing: border-box;
-}
-
-.move-to-hide-show:hover span {
-  color: #ff1f1f;
-}
-
-.to-hide {
-  background: url('@/assets/images/archive.svg') no-repeat center left
-    transparent;
-}
-
-.move-to-hide-show:hover .to-hide {
-  background: url('@/assets/images/archive-highlight.svg') no-repeat center left
-    transparent;
-}
-
-.to-show {
-  background: url('@/assets/images/unarchive.svg') no-repeat center left
-    transparent;
-}
-
-.move-to-hide-show:hover .to-show {
-  background: url('@/assets/images/unarchive-highlight.svg') no-repeat center
-    left transparent;
-}
-</style>

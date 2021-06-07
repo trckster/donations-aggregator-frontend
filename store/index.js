@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import donationAdapter from '@/adapters/DonationAdapter'
 
 function retrieveSortParameters(filters) {
@@ -7,9 +8,6 @@ function retrieveSortParameters(filters) {
     sortOrder = 'asc'
   } else if (filters.sort === 'time-desc') {
     sortField = 'paid_at'
-  } else if (filters.sort === 'time-asc') {
-    sortField = 'paid_at'
-    sortOrder = 'asc'
   }
 
   return [sortField, sortOrder]
@@ -18,12 +16,14 @@ function retrieveSortParameters(filters) {
 export const state = () => ({
   darkModeEnabled: false,
   isAuthenticated: false,
+  isFilterOpen: false,
   donations: [],
 })
 
 export const getters = {
   donations: ({ donations }) => donations,
   darkModeEnabled: ({ darkModeEnabled }) => darkModeEnabled,
+  isFilterOpen: ({ isFilterOpen }) => isFilterOpen,
 }
 
 export const mutations = {
@@ -36,6 +36,9 @@ export const mutations = {
     state.darkModeEnabled = !state.darkModeEnabled
     localStorage.setItem('darkModeEnabled', state.darkModeEnabled)
   },
+  toggleFilter(state) {
+    state.isFilterOpen = !state.isFilterOpen
+  },
   setDonations(state, donations) {
     state.donations = donations
   },
@@ -45,6 +48,11 @@ export const mutations = {
         state.donations.push(newDonation)
       }
     })
+  },
+  setDonation(state, newDonationData) {
+    const { id, ...newData } = newDonationData;
+    const donation = state.donations.find(dontaion => dontaion.id === id);
+    Object.assign(donation, newData);
   },
   removeDonation(state, donationId) {
     state.donations = state.donations.filter(
@@ -73,14 +81,13 @@ export const actions = {
 
     const data = await this.$axios
       .$get(
-        `donations?sort-field=${sortField}&sort-order=${sortOrder}&is-hidden=${
-          filters.is_hidden ? 1 : 0
+        `donations?sort-field=${sortField}&sort-order=${sortOrder}&is-hidden=${filters.is_hidden ? 1 : 0
         }`
       )
       .then((response) => {
         return response.map((donation) => donationAdapter(donation))
       })
-      .catch(() => {})
+      .catch(() => { })
 
     commit('setDonations', data)
   },
@@ -89,26 +96,34 @@ export const actions = {
     const currentCount = state.donations.length
     const data = await this.$axios
       .$get(
-        `donations?sort-field=${sortField}&sort-order=${sortOrder}&is-hidden=${
-          filters.is_hidden ? 1 : 0
+        `donations?sort-field=${sortField}&sort-order=${sortOrder}&is-hidden=${filters.is_hidden ? 1 : 0
         }&skip=${currentCount}`
       )
       .then((response) => {
         return response.map((donation) => donationAdapter(donation))
       })
-      .catch(() => {})
+      .catch(() => { })
 
     commit('addDonations', data)
 
     return data.length >= 25
   },
-  async update({ commit }, data) {
+  async updateHidden({ commit }, data) {
     await this.$axios
       .$put(`donations/${data.id}`, {
         'is-hidden': data.isHidden,
       })
       .then(() => {
         commit('removeDonation', data.id)
+      })
+  },
+  async updateComment({ commit }, data) {
+    await this.$axios
+      .$put(`donations/${data.id}`, {
+        'admin-message': data.adminComment,
+      })
+      .then(() => {
+        commit('setDonation', data)
       })
   },
 }

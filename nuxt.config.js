@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Донаты',
+    title: '"Libertarian Donate Feed" Project',
     htmlAttrs: {
       lang: 'en',
     },
@@ -14,7 +14,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['element-ui/lib/theme-chalk/index.css', '@/assets/css/main'],
+  css: ['@/assets/css/main'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -30,6 +30,7 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     '@nuxtjs/moment',
+    '@nuxtjs/device',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -53,7 +54,7 @@ export default {
       browserBaseURL: process.env.API_URL,
     },
   },
-
+  
   privateRuntimeConfig: {
     axios: {
       baseURL: process.env.BACKEND_API_URL,

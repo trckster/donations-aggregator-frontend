@@ -53,7 +53,7 @@ export default {
       })
     },
     updateFilters(newValue) {
-      this.filters = newValue
+      Object.assign(this.filters, newValue)
       this.loadDonations()
     },
   },
