@@ -1,5 +1,5 @@
 {
-  "name": "Frontend",
+  "name": "frontend",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -14,9 +14,9 @@
     "@nuxtjs/axios": "^5.13.1",
     "@nuxtjs/moment": "^1.6.1",
     "core-js": "^3.9.1",
-    "element-ui": "^2.15.1",
     "nuxt": "^2.15.3",
-    "vue-scroll-loader": "^2.0.2"
+    "vue-scroll-loader": "^2.0.2",
+    "vue-textarea-autosize": "^1.1.1"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^6.0.0",

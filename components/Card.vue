@@ -9,17 +9,20 @@
       @click="toggleActive"
     >
       <div v-if="isActiveComment">
-        <input
+        <textarea-autosize
           ref="inputComment"
-          v-model="currentComment"
+          :value="currentComment"
           class="input-box"
-          type="text"
-          maxlength="50"
-          @blur="changeAdminComment"
-          @keyup.enter="changeAdminComment"
+          maxlength="60"
+          min-height="24"
+          rows="1"
+          aria-multiline="true"
+          @blur.native="changeAdminComment"
+          @keyup.enter.native="changeAdminComment"
+          @keydown.enter.native="preventDefault"
         />
       </div>
-      <div v-else>
+      <div v-else class="text-wrap">
         {{ currentComment }}
       </div>
     </div>
@@ -75,87 +78,27 @@ export default {
         isHidden: !this.donation.isHidden,
       })
     },
-    changeAdminComment() {
-      this.$store.dispatch('updateComment', {
-        id: this.donation.id,
-        adminComment: this.currentComment,
-      })
-      this.toggleActive()
+    changeAdminComment(event) {
+      if (this.currentComment !== event.target.value) {
+        this.currentComment = event.target.value
+        this.$store.dispatch('updateComment', {
+          id: this.donation.id,
+          adminComment: this.currentComment,
+        })
+      }
+      this.isActiveComment = false
     },
     toggleActive() {
-      this.isActiveComment = !this.isActiveComment
+      this.isActiveComment = true
       this.$nextTick(() => {
         if (this.$refs.inputComment) {
-          this.$refs.inputComment.focus()
+          this.$refs.inputComment.$el.focus()
         }
       })
+    },
+    preventDefault(event) {
+      event.preventDefault()
     },
   },
 }
 </script>
-
-<style lang="scss" scoped>
-.donates-container .move-to-hide-show {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  display: inline-block;
-  padding: 16px;
-  opacity: 0;
-  -webkit-transition: opacity 100ms;
-  -o-transition: opacity 100ms;
-  transition: opacity 100ms;
-  cursor: pointer;
-}
-
-.donates__time {
-  -webkit-transition: opacity 100ms;
-  -o-transition: opacity 100ms;
-  transition: opacity 100ms;
-}
-
-.donates-container:hover .move-to-hide-show {
-  opacity: 1;
-}
-
-.donates-container:hover .donates__time {
-  opacity: 0;
-}
-
-.move-to-hide-show span {
-  font-family: Roboto, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 16px;
-  color: #b73f3f;
-  width: 100%;
-  display: inline-block;
-  padding-left: 22px;
-  box-sizing: border-box;
-}
-
-.move-to-hide-show:hover span {
-  color: #ff1f1f;
-}
-
-.to-hide {
-  background: url('@/assets/images/archive.svg') no-repeat center left
-    transparent;
-}
-
-.move-to-hide-show:hover .to-hide {
-  background: url('@/assets/images/archive-highlight.svg') no-repeat center left
-    transparent;
-}
-
-.to-show {
-  background: url('@/assets/images/unarchive.svg') no-repeat center left
-    transparent;
-}
-
-.move-to-hide-show:hover .to-show {
-  background: url('@/assets/images/unarchive-highlight.svg') no-repeat center
-    left transparent;
-}
-</style>
