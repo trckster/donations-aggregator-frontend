@@ -13,7 +13,7 @@
           ref="inputComment"
           :value="currentComment"
           class="input-box"
-          maxlength="60"
+          maxlength="1000"
           min-height="24"
           rows="1"
           aria-multiline="true"
@@ -30,7 +30,6 @@
       <div class="donates__title">
         <span class="donates__author"> {{ donation.from }} </span>
         <div class="donates__time">{{ donation.paidAt.fromNow() }}</div>
-        <!-- TODO change paid_at to time passed since this second -->
       </div>
       <PriceBadge :value="donation.amount" />
       <div class="donates__text">
