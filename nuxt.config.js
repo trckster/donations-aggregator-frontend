@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: '"Libertarian Donate Feed" Project',
+    title: 'Донатики',
     htmlAttrs: {
       lang: 'en',
     },
@@ -54,7 +54,7 @@ export default {
       browserBaseURL: process.env.API_URL,
     },
   },
-  
+
   privateRuntimeConfig: {
     axios: {
       baseURL: process.env.BACKEND_API_URL,
