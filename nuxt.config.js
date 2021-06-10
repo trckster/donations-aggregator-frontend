@@ -45,6 +45,7 @@ export default {
     locales: ['ru'],
   },
   axios: {
+    credentials: true,
     browserBaseURL: 'http://localhost:8000/api/',
     baseURL: 'http://localhost:8000/api/',
   },

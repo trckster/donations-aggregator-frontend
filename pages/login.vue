@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     login() {
-      alert(`Login try ${this.loginForm.email} - ${this.loginForm.password}`)
+      this.$store.dispatch('authorize', this.loginForm)
     },
   },
 }

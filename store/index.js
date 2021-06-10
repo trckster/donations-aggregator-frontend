@@ -65,6 +65,16 @@ export const mutations = {
 }
 
 export const actions = {
+  async authorize({dispatch, commit }, credentials) {
+    await this.$axios.$post('login', credentials)
+      .then(() => {
+        commit('setAuthenticated')
+        this.$router.replace('/')
+      })
+      .catch(({ response: { data } }) => {
+        alert(data.message)
+      })
+  },
   async nuxtServerInit({ dispatch }) {
     await dispatch('loadUser')
   },
