@@ -8,6 +8,9 @@ function retrieveSortParameters(filters) {
     sortOrder = 'asc'
   } else if (filters.sort === 'time-desc') {
     sortField = 'paid_at'
+  } else if (filters.sort === 'time-asc') {
+    sortField = 'paid_at'
+    sortOrder = 'asc'
   }
 
   return [sortField, sortOrder]
