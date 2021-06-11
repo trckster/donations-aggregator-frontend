@@ -31,6 +31,7 @@ export default {
     '@nuxtjs/eslint-module',
     '@nuxtjs/moment',
     '@nuxtjs/device',
+    '@nuxtjs/laravel-echo',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -44,10 +45,18 @@ export default {
     defaultLocale: 'ru',
     locales: ['ru'],
   },
+
   axios: {
     credentials: true,
     browserBaseURL: 'http://localhost:8000/api/',
     baseURL: 'http://localhost:8000/api/',
+  },
+
+  echo: {
+    broadcaster: 'pusher',
+    key: process.env.PUSHER_KEY,
+    cluster: 'eu',
+    forceTLS: true,
   },
 
   publicRuntimeConfig: {

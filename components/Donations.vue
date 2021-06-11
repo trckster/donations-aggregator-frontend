@@ -41,6 +41,11 @@ export default {
   created() {
     this.loadDonations()
   },
+  mounted() {
+    this.$echo.channel('donations').listen('DonationCreated', (e) => {
+      console.log(e)
+    })
+  },
   methods: {
     loadDonations() {
       this.$store.dispatch('loadDonations', this.filters).then(() => {
