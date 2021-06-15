@@ -42,9 +42,16 @@ export default {
     this.loadDonations()
   },
   mounted() {
-    this.$echo.channel('donations').listen('DonationCreated', (e) => {
-      console.log(e)
-    })
+    this.$echo
+      .channel('private-donations')
+      .listen('DonationCreated', (e) => {
+        console.log('Created')
+        console.log(e)
+      })
+      .listen('DonationUpdated', (e) => {
+        console.log('Updating')
+        console.log(e)
+      })
   },
   methods: {
     loadDonations() {

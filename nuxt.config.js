@@ -57,6 +57,7 @@ export default {
     key: process.env.PUSHER_KEY,
     cluster: 'eu',
     forceTLS: true,
+    authEndpoint: process.env.BROADCAST_AUTH_URL,
   },
 
   publicRuntimeConfig: {

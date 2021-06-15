@@ -14,7 +14,6 @@
           :value="currentComment"
           class="input-box"
           maxlength="1000"
-          min-height="24"
           rows="1"
           aria-multiline="true"
           @blur.native="changeAdminComment"
