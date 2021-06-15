@@ -52,10 +52,26 @@ export const mutations = {
       }
     })
   },
-  setDonation(state, newDonationData) {
-    const { id, ...newData } = newDonationData;
-    const donation = state.donations.find(dontaion => dontaion.id === id);
-    Object.assign(donation, newData);
+  setDonation(state, { newDonation, showHidden }) {
+    const donation = state.donations.find(donation => donation.id === newDonation.id);
+
+    if (!donation) {
+      return
+    }
+
+    Object.assign(donation, {...newDonation})
+
+    if (showHidden === null) {
+      return
+    }
+
+    if (showHidden && donation.isHidden || !showHidden && !donation.isHidden) {
+      return
+    }
+
+    state.donations = state.donations.filter(
+      (oldDonation) => oldDonation.id !== donation.id
+    )
   },
   removeDonation(state, donationId) {
     state.donations = state.donations.filter(
@@ -135,8 +151,8 @@ export const actions = {
       .$put(`donations/${data.id}`, {
         'admin-message': data.adminComment,
       })
-      .then(() => {
-        commit('setDonation', data)
+      .then((donation) => {
+        commit('setDonation', { newDonation: donationAdapter(donation), showHidden: null })
       })
   },
 }

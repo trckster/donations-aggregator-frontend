@@ -75,6 +75,14 @@ export default {
       }
     },
   },
+  watch: {
+    donation: {
+      deep: true,
+      handler({ adminComment }) {
+        this.currentComment = adminComment
+      },
+    },
+  },
   methods: {
     changeIsHidden() {
       this.$store.dispatch('updateHidden', {

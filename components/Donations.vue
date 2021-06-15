@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import donationAdapter from '@/adapters/DonationAdapter'
 import Card from './Card'
 import Header from './header/Header'
 
@@ -48,9 +49,11 @@ export default {
         console.log('Created')
         console.log(e)
       })
-      .listen('DonationUpdated', (e) => {
-        console.log('Updating')
-        console.log(e)
+      .listen('DonationUpdated', ({ donation }) => {
+        this.$store.commit('setDonation', {
+          newDonation: donationAdapter(donation),
+          showHidden: this.filters.is_hidden,
+        })
       })
   },
   methods: {
