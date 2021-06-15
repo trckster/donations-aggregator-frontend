@@ -54,7 +54,7 @@ export default {
 
   echo: {
     broadcaster: 'pusher',
-    key: process.env.PUSHER_KEY,
+    key: process.env.PUSHER_APP_KEY,
     cluster: 'eu',
     forceTLS: true,
     authEndpoint: process.env.BROADCAST_AUTH_URL || '/broadcasting/auth',
