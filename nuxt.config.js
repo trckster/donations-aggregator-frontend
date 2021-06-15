@@ -64,6 +64,10 @@ export default {
     axios: {
       browserBaseURL: process.env.API_URL,
     },
+    echo: {
+      key: process.env.PUSHER_APP_KEY,
+      authEndpoint: process.env.BROADCAST_AUTH_URL || '/broadcasting/auth',
+    },
   },
 
   privateRuntimeConfig: {
