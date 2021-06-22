@@ -52,6 +52,24 @@ export const mutations = {
       }
     })
   },
+  addDonation(state, { newDonation, filters}) {
+    const [sortField, sortOrder] = retrieveSortParameters(filters)
+
+    if (sortField === 'paid_at') {
+      if (sortOrder === 'asc') {
+        state.donations.push(newDonation)
+      } else {
+        state.donations.unshift(newDonation)
+      }
+    } else {
+      state.donations.push(newDonation)
+      if (sortOrder === 'asc') {
+        state.donations.sort((a, b) => a.amount - b.amount)
+      } else {
+        state.donations.sort((a, b) => b.amount - a.amount)
+      }
+    }
+  },
   setDonation(state, { newDonation, showHidden }) {
     const donation = state.donations.find(donation => donation.id === newDonation.id);
 

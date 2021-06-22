@@ -45,9 +45,14 @@ export default {
   mounted() {
     this.$echo
       .channel('private-donations')
-      .listen('DonationCreated', (e) => {
-        console.log('Created')
-        console.log(e)
+      .listen('DonationCreated', ({ donation }) => {
+        if (this.filters.is_hidden) {
+          return
+        }
+        this.$store.commit('addDonation', {
+          newDonation: donationAdapter(donation),
+          filters: this.filters,
+        })
       })
       .listen('DonationUpdated', ({ donation }) => {
         this.$store.commit('setDonation', {
