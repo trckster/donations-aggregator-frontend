@@ -39,7 +39,7 @@ export default {
   },
   beforeCreate() {
     if (this.$store.state.isAuthenticated) {
-      this.$router.push('/')
+      this.$router.replace('/')
     }
   },
   methods: {
