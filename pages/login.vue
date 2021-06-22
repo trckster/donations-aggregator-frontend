@@ -5,7 +5,12 @@
         <div slot="header">
           <span>Авторизация</span>
         </div>
-        <el-form class="login-form" :label-position="'top'" :model="loginForm">
+        <el-form
+          class="login-form"
+          :label-position="'top'"
+          :model="loginForm"
+          @keydown.enter.native="login"
+        >
           <el-form-item class="form-item" label="Почта:">
             <el-input v-model="loginForm.email"></el-input>
           </el-form-item>
