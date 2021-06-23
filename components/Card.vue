@@ -31,7 +31,7 @@
         <div class="donates__time">{{ donation.paidAt.fromNow() }}</div>
       </div>
       <PriceBadge :value="donation.amount" />
-      <div class="donates__text">
+      <div class="donates__text" @click="copyText">
         <p>
           {{ donation.text }}
         </p>
@@ -84,6 +84,20 @@ export default {
     },
   },
   methods: {
+    copyText() {
+      const el = document.createElement('textarea')
+      el.value = this.donation.text
+      document.body.appendChild(el)
+      el.select()
+      document.execCommand('copy')
+      document.body.removeChild(el)
+
+      this.$notify({
+        type: 'success',
+        message: 'Текст доната успешно скопирован',
+        duration: 2000,
+      })
+    },
     changeIsHidden() {
       this.$store.dispatch('updateHidden', {
         id: this.donation.id,
