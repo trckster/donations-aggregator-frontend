@@ -22,7 +22,7 @@ import donationAdapter from '@/adapters/DonationAdapter'
 import Card from './Card'
 import Header from './header/Header'
 
-export default {
+const DonationsComponent = {
   name: 'Donations',
   components: { Header, Card },
   data() {
@@ -41,6 +41,14 @@ export default {
   },
   created() {
     this.loadDonations()
+
+    if (process.client) {
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowUp') {
+          this.hideFirst()
+        }
+      })
+    }
   },
   mounted() {
     this.$echo
@@ -62,6 +70,14 @@ export default {
       })
   },
   methods: {
+    hideFirst() {
+      if (!this.filters.is_hidden) {
+        this.$store.dispatch('updateHidden', {
+          id: this.donations[0].id,
+          isHidden: !this.donations[0].isHidden,
+        })
+      }
+    },
     loadDonations() {
       this.$store.dispatch('loadDonations', this.filters).then(() => {
         this.stopLoading = this.donations && this.donations.length < 25
@@ -78,4 +94,6 @@ export default {
     },
   },
 }
+
+export default DonationsComponent
 </script>
