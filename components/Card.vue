@@ -28,7 +28,7 @@
     <div class="donates-container">
       <div class="donates__title">
         <span class="donates__author"> {{ donation.from }} </span>
-        <div class="donates__time">{{ donation.paidAt.fromNow() }}</div>
+        <div class="donates__time">{{ pastTime }}</div>
       </div>
       <PriceBadge :value="donation.amount" />
       <div class="donates__text" @click="copyText">
@@ -63,8 +63,9 @@ export default {
   data() {
     return {
       isActiveComment: false,
-      // TODO: Ask whether comment in data is better than donation state
       currentComment: this.donation.adminComment,
+      pastTime: null,
+      interval: null,
     }
   },
   computed: {
@@ -82,6 +83,12 @@ export default {
         this.currentComment = adminComment
       },
     },
+  },
+  created() {
+    this.pastTime = this.donation.paidAt.fromNow()
+    this.interval = setInterval(() => {
+      this.pastTime = this.donation.paidAt.fromNow()
+    }, 500)
   },
   methods: {
     copyText() {

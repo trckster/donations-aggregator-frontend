@@ -44,6 +44,7 @@ export default {
   moment: {
     defaultLocale: 'ru',
     locales: ['ru'],
+    defaultTimezone: 'GMT',
   },
 
   axios: {
