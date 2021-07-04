@@ -9,7 +9,7 @@ function donationAdapter(donation) {
     from: donation.from,
     amount: donation.amount / 100,
     commission: donation.amount / 100,
-    text: donation.text,
+    text: donation.text.replaceAll('&quot;', '"'),
     adminComment: donation.admin_comment,
     status: donation.status,
     additionalData: donation.additional_data,
